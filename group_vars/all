@@ -1,0 +1,6 @@
+database_name: api
+database_user: api
+database_host: postgres-1.asimt.sa
+database_port: 5432
+
+uwsgi_http_port: 8000

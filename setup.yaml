@@ -1,0 +1,16 @@
+- name: Setup Django And PostgreSQL Server
+  hosts: all
+  user: root
+
+
+  pre_tasks:
+    - name: Update all packages to their latest version
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+      become: yes
+      become_user: root
+      
+  roles:
+    - django
+    - postgre-sql
