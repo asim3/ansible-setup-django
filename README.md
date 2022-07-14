@@ -1,2 +1,3 @@
-# ansible-setup-django
-Ansible Files To Setup Django And PostgreSQL
+# Setup Django And PostgreSQL Server
+
+Ansible files to setup Django And PostgreSQL server
