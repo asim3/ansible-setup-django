@@ -2,15 +2,36 @@
   hosts: all
   user: root
 
-
   pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+      become: yes
+      become_user: root
+    
+    - name: Fix broken packages
+      ansible.builtin.apt:
+        state: fixed
+        autoremove: yes
+      become: yes
+      become_user: root
+    
     - name: Update all packages to their latest version
       ansible.builtin.apt:
         name: "*"
         state: latest
       become: yes
       become_user: root
-      
+    
+    - name: Fix and clean all packages
+      ansible.builtin.apt:
+        state: fixed
+        upgrade: yes
+        autoclean: yes
+        autoremove: yes
+      become: yes
+      become_user: root
+
   roles:
     - django
     - postgre-sql
