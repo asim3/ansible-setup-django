@@ -1,2 +1,33 @@
-- name: hostname
-  ansible.builtin.command: hostname
+- name: Install Required Packages
+  ansible.builtin.apt:
+    pkg:
+    - python3-pip
+    - python3-dev
+    - libpq-dev
+    - curl
+    - ufw
+    - nginx
+  become: yes
+  become_user: root
+
+- name: Open SSH Port, with connection rate limited
+  community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+  become: yes
+  become_user: root
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+  become: yes
+  become_user: root
+
+- name: Start & enable service ufw
+  ansible.builtin.service:
+    name: ufw
+    state: started
+    enabled: yes
+  become: yes
+  become_user: root
